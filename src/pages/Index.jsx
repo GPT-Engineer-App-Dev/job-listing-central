@@ -1,17 +1,31 @@
-// Update this page (the content is just a fallback if you fail and example)
-// Use chakra-ui
-import { Container, Text, VStack } from "@chakra-ui/react";
+import { Container, VStack, Heading, Text, Box, SimpleGrid, Button } from "@chakra-ui/react";
 
-// Example of using react-icons
-// import { FaRocket } from "react-icons/fa";
-// <IconButton aria-label="Add" icon={<FaRocket />} size="lg" />; // IconButton would also have to be imported from chakra
+const jobs = [
+  { id: 1, title: "Software Engineer", company: "Tech Corp", location: "San Francisco, CA", description: "Develop and maintain web applications." },
+  { id: 2, title: "Product Manager", company: "Innovate Ltd", location: "New York, NY", description: "Lead product development teams." },
+  { id: 3, title: "UX Designer", company: "Design Studio", location: "Remote", description: "Create user-friendly interfaces." },
+];
+
+const JobCard = ({ title, company, location, description }) => (
+  <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={4}>
+    <Heading size="md">{title}</Heading>
+    <Text fontWeight="bold">{company}</Text>
+    <Text>{location}</Text>
+    <Text mt={2}>{description}</Text>
+    <Button mt={4} colorScheme="teal">Apply Now</Button>
+  </Box>
+);
 
 const Index = () => {
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Text fontSize="2xl">Your Blank Canvas</Text>
-        <Text>Chat with the agent to start making edits.</Text>
+    <Container maxW="container.xl" py={10}>
+      <VStack spacing={8}>
+        <Heading as="h1" size="2xl">Job Listings</Heading>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
+          {jobs.map(job => (
+            <JobCard key={job.id} {...job} />
+          ))}
+        </SimpleGrid>
       </VStack>
     </Container>
   );
